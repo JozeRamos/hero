@@ -2,7 +2,7 @@ import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
 public class Arena {
-    private final Hero hero;
+
     private int width;
     private int height;
     private Position position;
@@ -10,22 +10,26 @@ public class Arena {
     public Arena(int width, int height){
         this.width = width;
         this.height = height;
-        hero = new Hero(10, 10);
+        position = new Position(5,5);
     }
 
     public Position moveUp() {
+        System.out.println(getX() + "   " + getWidth());
         return new Position(position.getX(), position.getY() - 1);
     }
 
     public Position moveDown(){
+        System.out.println(getX() + "   " + getWidth());
         return new Position(position.getX(), position.getY() + 1);
     }
 
     public Position moveRight(){
+        System.out.println(getY() + "   " + getHeight());
         return new Position(position.getX() + 1, position.getY());
     }
 
     public Position moveLeft(){
+        System.out.println(getY() + "   " + getHeight());
         return new Position(position.getX() - 1, position.getY());
     }
 
@@ -70,9 +74,14 @@ public class Arena {
         this.height = height;
     }
 
+    public boolean canHeroMove(Position pos) {
+        return (pos.getX() >= 0 && pos.getX() < width) &&
+                (pos.getY() >= 0 && pos.getY() < height);
+    }
+
     private class Hero {
         private Hero(int x, int y){
-            position = new Position(x,y);
+
         }
     }
 }

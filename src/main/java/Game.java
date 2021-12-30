@@ -30,7 +30,7 @@ public class Game {
     }
     private void processKey(KeyStroke key) {
         System.out.println(key);
-        switch (key.getKeyType()) {
+         switch (key.getKeyType()) {
             case ArrowUp:
                 moveHero(arena.moveUp());
                 break;
@@ -46,8 +46,10 @@ public class Game {
         }
     }
     private void moveHero(Position position) {
-        arena.setPosition(position);
+        if (arena.canHeroMove(position))
+            arena.setPosition(position);
     }
+
     private void draw() throws IOException {
         screen.clear();
         arena.draw(screen);
