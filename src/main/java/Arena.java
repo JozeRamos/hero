@@ -14,22 +14,18 @@ public class Arena {
     }
 
     public Position moveUp() {
-        System.out.println(getX() + "   " + getWidth());
         return new Position(position.getX(), position.getY() - 1);
     }
 
     public Position moveDown(){
-        System.out.println(getX() + "   " + getWidth());
         return new Position(position.getX(), position.getY() + 1);
     }
 
     public Position moveRight(){
-        System.out.println(getY() + "   " + getHeight());
         return new Position(position.getX() + 1, position.getY());
     }
 
     public Position moveLeft(){
-        System.out.println(getY() + "   " + getHeight());
         return new Position(position.getX() - 1, position.getY());
     }
 
@@ -81,7 +77,7 @@ public class Arena {
 
     private class Hero {
         private Hero(int x, int y){
-
+            position = new Position(5,5);
         }
     }
 }
