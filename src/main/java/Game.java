@@ -10,11 +10,11 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 
 public class Game {
-    private final Hero hero;
     private TerminalScreen screen;
+    private Arena arena;
 
     public Game(){
-        hero = new Hero(10, 10);
+        arena = new Arena(10,10);
         try {
             TerminalSize terminalSize = new TerminalSize(40, 20);
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
@@ -32,25 +32,25 @@ public class Game {
         System.out.println(key);
         switch (key.getKeyType()) {
             case ArrowUp:
-                moveHero(hero.moveUp());
+                moveHero(arena.moveUp());
                 break;
             case ArrowDown:
-                moveHero(hero.moveDown());
+                moveHero(arena.moveDown());
                 break;
             case ArrowRight:
-                moveHero(hero.moveRight());
+                moveHero(arena.moveRight());
                 break;
             case ArrowLeft:
-                moveHero(hero.moveLeft());
+                moveHero(arena.moveLeft());
                 break;
         }
     }
     private void moveHero(Position position) {
-        hero.setPosition(position);
+        arena.setPosition(position);
     }
     private void draw() throws IOException {
         screen.clear();
-        hero.draw(screen);
+        arena.draw(screen);
         screen.refresh();
     }
     public void run() throws IOException {

@@ -1,12 +1,16 @@
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
-public class Hero {
+public class Arena {
+    private final Hero hero;
+    private int width;
+    private int height;
     private Position position;
 
-    public Hero(int x, int y){
-
-        position = new Position(x,y);
+    public Arena(int width, int height){
+        this.width = width;
+        this.height = height;
+        hero = new Hero(10, 10);
     }
 
     public Position moveUp() {
@@ -48,5 +52,27 @@ public class Hero {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    private class Hero {
+        private Hero(int x, int y){
+            position = new Position(x,y);
+        }
     }
 }
