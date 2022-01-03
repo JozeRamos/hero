@@ -2,8 +2,11 @@ import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
-public class Arena {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Arena {
+    private List<Wall> walls;
     private final Hero hero;
     private int width;
     private int height;
@@ -13,6 +16,20 @@ public class Arena {
         this.width = width;
         this.height = height;
         hero = new Hero(10, 10);
+        this.walls = createWalls();
+    }
+
+    private List<Wall> createWalls() {
+        List<Wall> walls = new ArrayList<>();
+        for (int c = 0; c < width; c++) {
+            walls.add(new Wall(c, 0));
+            walls.add(new Wall(c, height - 1));
+        }
+        for (int r = 1; r < height - 1; r++) {
+            walls.add(new Wall(0, r));
+            walls.add(new Wall(width - 1, r));
+        }
+        return walls;
     }
 
     public Position moveUp() {
@@ -51,6 +68,8 @@ public class Arena {
         screen.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         screen.fillRectangle(new TerminalPosition(0,0), new TerminalSize(width, height), ' ');
         hero.draw(screen);
+        for (Wall wall : walls)
+            wall.draw(screen);
     }
 
     public void setPosition(Position position) {
@@ -73,10 +92,12 @@ public class Arena {
         this.height = height;
     }
 
-    public boolean canHeroMove(Position pos) {
+    public boolean canHeroMove(Position pos){
         return (pos.getX() >= 0 && pos.getX() < width) &&
-                (pos.getY() >= 0 && pos.getY() < height);
+                (pos.getY() >= 0 && pos.getY() < height) &&
+                !walls.contains(new Wall(pos.getX(), pos.getY()));
     }
+
 
     private class Hero {
         private Hero(int x, int y){

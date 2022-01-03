@@ -22,4 +22,11 @@ public class Position {
     public void setX(int x) {
         this.x = x;
     }
+
+    public boolean equals(Object o) {
+        if(o == null || o.getClass() != this.getClass()) return false;
+
+        return (this == o) ||
+                (this.x == ((Position) o).x && this.y == ((Position) o).y);
+    }
 }
