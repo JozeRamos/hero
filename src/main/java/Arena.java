@@ -1,4 +1,5 @@
-import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.*;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 
 public class Arena {
@@ -45,9 +46,17 @@ public class Arena {
         position.setY(y);
     }
 
-    public void draw(TerminalScreen screen) {
-        screen.setCharacter(position.getX(), position.getY(),
-                TextCharacter.fromCharacter('X')[0]);
+    public void draw(TextGraphics screen) {
+        screen.setBackgroundColor(TextColor.Factory.fromString("#336699"));
+        screen.fillRectangle(new TerminalPosition(0,0), new TerminalSize(width, height), ' ');
+        heroDraw(screen);
+    }
+
+    public void heroDraw(TextGraphics screen){
+        screen.setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
+        screen.enableModifiers(SGR.BOLD);
+        screen.putString(new TerminalPosition(position.getX(), position.getY()), "X");
+
     }
 
     public void setPosition(Position position) {
