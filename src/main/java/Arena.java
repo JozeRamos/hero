@@ -4,6 +4,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 
 public class Arena {
 
+    private final Hero hero;
     private int width;
     private int height;
     private Position position;
@@ -11,7 +12,7 @@ public class Arena {
     public Arena(int width, int height){
         this.width = width;
         this.height = height;
-        position = new Position(5,5);
+        hero = new Hero(10, 10);
     }
 
     public Position moveUp() {
@@ -49,14 +50,7 @@ public class Arena {
     public void draw(TextGraphics screen) {
         screen.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         screen.fillRectangle(new TerminalPosition(0,0), new TerminalSize(width, height), ' ');
-        heroDraw(screen);
-    }
-
-    public void heroDraw(TextGraphics screen){
-        screen.setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
-        screen.enableModifiers(SGR.BOLD);
-        screen.putString(new TerminalPosition(position.getX(), position.getY()), "X");
-
+        hero.draw(screen);
     }
 
     public void setPosition(Position position) {
@@ -86,7 +80,12 @@ public class Arena {
 
     private class Hero {
         private Hero(int x, int y){
-            position = new Position(5,5);
+            position = new Position(x,y);
+        }
+        public void draw(TextGraphics screen){
+            screen.setForegroundColor(TextColor.Factory.fromString("#FFFF33"));
+            screen.enableModifiers(SGR.BOLD);
+            screen.putString(new TerminalPosition(position.getX(), position.getY()), "X");
         }
     }
 }

@@ -14,7 +14,6 @@ public class Game {
     private Arena arena;
 
     public Game(){
-        arena = new Arena(10,10);
         try {
             TerminalSize terminalSize = new TerminalSize(40, 20);
             DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
@@ -27,6 +26,7 @@ public class Game {
         } catch (IOException e){
             e.printStackTrace();
         }
+        arena = new Arena(40, 20);
     }
     private void processKey(KeyStroke key) {
         System.out.println(key);
